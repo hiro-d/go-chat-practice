@@ -31,7 +31,7 @@ func main() {
 	http.Handle("/", &templateHandler{filename: "chat.html"})
 	http.Handle("/room", r)
 	go r.run()
-	log.Println("Wevサーバーを開始します。ポート: ", *addr)
+	log.Println("Webサーバーを開始します。ポート: ", *addr)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}
