@@ -1,5 +1,11 @@
 package main
 
+import (
+	"log"
+	"net/http"
+	"github.com/gorilla/websocket"
+)
+
 type room struct {
 	forward chan []byte
 	join    chan *client
@@ -57,6 +63,6 @@ func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 	r.join <- client
 	defer func() { r.leave <- client }()
-	go client.Write()
+	go client.write()
 	client.read()
 }
